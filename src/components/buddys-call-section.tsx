@@ -6,12 +6,12 @@ import chi1 from '../assets/chi1.png';
 import chi2 from '../assets/chi2.png';
 import buddy1 from 'figma:asset/04e308c1ef0e26edc5f2b92cf13b4cc9e04a6889.png';
 import buddy2 from 'figma:asset/91e43294aed4714fd13e4ce9a341abdcdd714b3b.png';
+import mobileImage from '../assets/mobile.png';
 
 const eatGif = chi1;
 const letterGif = chi2;
 const sleepGif = buddy1;
 const walkGif = buddy2;
-const mobileImage = 'https://teddywchoi.github.io/eerion/img/mobile.png';
 
 export function BuddysCallSection() {
   const { language } = useLanguage();

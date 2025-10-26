@@ -18,12 +18,12 @@ import profileScreen from 'figma:asset/3c3f6f101209ab19107e966a2cdb34b69c79fa40.
 import communityScreen from 'figma:asset/47d6d340e1038b0ee2c12e84bc79855a4392e717.png';
 import bulbsScreen from 'figma:asset/d3bfef620442a3ab97eb512c28edfdc822d6a4af.png';
 import costumeScreen from 'figma:asset/e9cee0f46d5c3c7fa4ab0597518e09211093c698.png';
-const sleepGif = 'https://teddywchoi.github.io/eerion/img/sleep.gif';
-const walkGif = 'https://teddywchoi.github.io/eerion/img/walk.gif';
-const eatGif = 'https://teddywchoi.github.io/eerion/img/eat.gif';
-const dashboardGif = 'https://teddywchoi.github.io/eerion/img/normal.gif';
-const letterGif = 'https://teddywchoi.github.io/eerion/img/letter.gif';
 import keyringImage from 'figma:asset/5923540eb820403a6d0ae888728508a1141e776d.png';
+import sleepGif from '../assets/sleep.gif';
+import walkGif from '../assets/walk.gif';
+import eatGif from '../assets/eat.gif';
+import dashboardGif from '../assets/normal.gif';
+import letterGif from '../assets/letter.gif';
 import { useLanguage } from '../contexts/language-context';
 import { translations } from '../utils/translations';
 

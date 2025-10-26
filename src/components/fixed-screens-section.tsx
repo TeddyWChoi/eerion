@@ -2,14 +2,13 @@ import { motion } from 'motion/react';
 import { useLanguage } from '../contexts/language-context';
 import { translations } from '../utils/translations';
 
-const standardRandomGif = 'https://teddywchoi.github.io/eerion/img/standard-random.gif';
-const walkingGif = 'https://teddywchoi.github.io/eerion/img/walking.gif';
-const sleepingGif = 'https://teddywchoi.github.io/eerion/img/sleeping.gif';
-const eatingGif = 'https://teddywchoi.github.io/eerion/img/eating.gif';
-const postGif = 'https://teddywchoi.github.io/eerion/img/post.gif';
-const standardImage = 'https://teddywchoi.github.io/eerion/img/standard.png';
-const phoneMockup = 'https://teddywchoi.github.io/eerion/img/phone.png';
-const mobile2 = 'https://teddywchoi.github.io/eerion/img/mobile2.png';
+import standardRandomGif from '../assets/standard-random.gif';
+import walkingGif from '../assets/walking.gif';
+import sleepingGif from '../assets/sleeping.gif';
+import eatingGif from '../assets/eating.gif';
+import postGif from '../assets/post.gif';
+import standardImage from '../assets/standard.png';
+import mobile2 from '../assets/mobile2.png';
 
 export function FixedScreensSection() {
   const { language } = useLanguage();
