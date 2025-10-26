@@ -250,7 +250,7 @@ export function ScreenshotsSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-gray-900 mb-4" style={{ fontFamily: "'ZCOOL KuaiLe', cursive" }}>
             {t.experienceTitle}
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-full mx-auto">
             {t.experienceDescription}
           </p>
         </motion.div>

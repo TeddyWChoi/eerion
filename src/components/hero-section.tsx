@@ -41,7 +41,7 @@ export function HeroSection() {
               {t.heroTitle2}
             </h1>
             
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-full mx-auto lg:mx-0">
               {t.heroDescription}
             </p>
             
