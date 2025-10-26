@@ -42,7 +42,7 @@ export function CTASection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-lg sm:text-xl text-white/90 mb-12 max-w-2xl mx-auto"
+              className="text-lg sm:text-xl text-white/90 mb-12 max-w-4xl mx-auto"
             >
               {t.ctaDescription}
             </motion.p>
