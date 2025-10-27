@@ -45,8 +45,8 @@ export function BuddysCallSection() {
   ];
 
   return (
-    <section className="bg-[#c5defc] py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-[#c5defc] py-16 sm:py-24 px-0 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -11,13 +11,13 @@ export function HeroSection() {
 
   return (
     <section 
-      className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 px-0 sm:px-6 lg:px-8 overflow-hidden"
       style={{
         background: 'linear-gradient(135deg, rgba(32, 237, 163, 0.10) 0%, #EFF6FF 50%, rgba(254, 42, 179, 0.10) 100%)'
       }}
     >
       
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <motion.div

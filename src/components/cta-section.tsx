@@ -15,8 +15,8 @@ export function CTASection() {
   });
 
   return (
-    <section id="download" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+    <section id="download" className="py-16 sm:py-24 px-0 sm:px-6 lg:px-8 bg-white" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}

@@ -244,10 +244,10 @@ export function ScreenshotsSection() {
     return (
         <section
             id="screenshots"
-            className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100"
+            className="py-16 sm:py-24 px-0 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100"
             ref={sectionRef}
         >
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-7xl mx-auto px-4">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}

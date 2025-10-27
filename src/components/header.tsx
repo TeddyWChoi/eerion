@@ -29,8 +29,8 @@ export function Header() {
                 isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
             }`}
         >
-            <div className="max-w-7xl mx-auto px-0 lg:px-4">
-                <div className="flex items-center justify-between h-16 sm:h-20 px-4 lg:px-0">
+            <div className="max-w-7xl mx-auto px-0">
+                <div className="flex items-center justify-between h-16 sm:h-20 px-4">
                     <div className="flex items-center gap-3">
                         <img src={logo} alt="eerion" className="h-8 sm:h-10 w-auto" />
                     </div>
