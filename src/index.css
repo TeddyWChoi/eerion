@@ -2679,6 +2679,6 @@ html {
         z-index: 2;
         position: relative;
         min-height: 0 !important;
-        padding: 50px 0 !important;
+        padding: 30px 40px !important;
     }
 }
