@@ -28,362 +28,383 @@ import { useLanguage } from '../contexts/language-context';
 import { translations } from '../utils/translations';
 
 export function ScreenshotsSection() {
-  const { language } = useLanguage();
-  const t = translations[language];
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [introComplete, setIntroComplete] = useState(false);
-  const [showKeyring, setShowKeyring] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const keyringTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const hasPlayedIntroRef = useRef(false);
+    const { language } = useLanguage();
+    const t = translations[language];
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [introComplete, setIntroComplete] = useState(false);
+    const [showKeyring, setShowKeyring] = useState(false);
+    const [isInView, setIsInView] = useState(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const keyringTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const hasPlayedIntroRef = useRef(false);
 
-  const screenshots = [
-    {
-      image: welcomeScreen,
-      title: t.screenshot1Title,
-      description: t.screenshot1Description,
-      gif: null,
-    },
-    {
-      image: eerionWelcome,
-      title: t.screenshot2Title,
-      description: t.screenshot2Description,
-      gif: null,
-    },
-    {
-      image: loadingScreen,
-      title: t.screenshot3Title,
-      description: t.screenshot3Description,
-      gif: null,
-    },
-    {
-      image: guardianSpirit,
-      title: t.screenshot4Title,
-      description: t.screenshot4Description,
-      gif: null,
-    },
-    {
-      image: homeScreen,
-      title: t.screenshot5Title,
-      description: t.screenshot5Description,
-      gif: dashboardGif,
-    },
-    {
-      image: walkingScreen,
-      title: t.screenshot6Title,
-      description: t.screenshot6Description,
-      gif: walkGif,
-    },
-    {
-      image: eatingScreen,
-      title: t.screenshot7Title,
-      description: t.screenshot7Description,
-      gif: eatGif,
-    },
-    {
-      image: sleepScreen,
-      title: t.screenshot8Title,
-      description: t.screenshot8Description,
-      gif: sleepGif,
-    },
-    {
-      image: exploreMapScreen,
-      title: t.screenshot9Title,
-      description: t.screenshot9Description,
-      gif: null,
-    },
-    {
-      image: exploreAddScreen,
-      title: t.screenshot10Title,
-      description: t.screenshot10Description,
-      gif: null,
-    },
-    {
-      image: communityScreen,
-      title: t.screenshot11Title,
-      description: t.screenshot11Description,
-      gif: null,
-    },
-    {
-      image: postScreen,
-      title: t.screenshot12Title,
-      description: t.screenshot12Description,
-      gif: null,
-    },
-    {
-      image: chatScreen,
-      title: t.screenshot13Title,
-      description: t.screenshot13Description,
-      gif: letterGif,
-    },
-    {
-      image: bulbsScreen,
-      title: t.screenshot14Title,
-      description: t.screenshot14Description,
-      gif: null,
-    },
-    {
-      image: costumeScreen,
-      title: t.screenshot15Title,
-      description: t.screenshot15Description,
-      gif: null,
-    },
-    {
-      image: shoppingScreen,
-      title: t.screenshot16Title,
-      description: t.screenshot16Description,
-      gif: null,
-    },
-    {
-      image: collectionScreen,
-      title: t.screenshot17Title,
-      description: t.screenshot17Description,
-      gif: null,
-    },
-  ];
+    const screenshots = [
+        {
+            image: welcomeScreen,
+            title: t.screenshot1Title,
+            description: t.screenshot1Description,
+            gif: null,
+        },
+        {
+            image: eerionWelcome,
+            title: t.screenshot2Title,
+            description: t.screenshot2Description,
+            gif: null,
+        },
+        {
+            image: loadingScreen,
+            title: t.screenshot3Title,
+            description: t.screenshot3Description,
+            gif: null,
+        },
+        {
+            image: guardianSpirit,
+            title: t.screenshot4Title,
+            description: t.screenshot4Description,
+            gif: null,
+        },
+        {
+            image: homeScreen,
+            title: t.screenshot5Title,
+            description: t.screenshot5Description,
+            gif: dashboardGif,
+        },
+        {
+            image: walkingScreen,
+            title: t.screenshot6Title,
+            description: t.screenshot6Description,
+            gif: walkGif,
+        },
+        {
+            image: eatingScreen,
+            title: t.screenshot7Title,
+            description: t.screenshot7Description,
+            gif: eatGif,
+        },
+        {
+            image: sleepScreen,
+            title: t.screenshot8Title,
+            description: t.screenshot8Description,
+            gif: sleepGif,
+        },
+        {
+            image: exploreMapScreen,
+            title: t.screenshot9Title,
+            description: t.screenshot9Description,
+            gif: null,
+        },
+        {
+            image: exploreAddScreen,
+            title: t.screenshot10Title,
+            description: t.screenshot10Description,
+            gif: null,
+        },
+        {
+            image: communityScreen,
+            title: t.screenshot11Title,
+            description: t.screenshot11Description,
+            gif: null,
+        },
+        {
+            image: postScreen,
+            title: t.screenshot12Title,
+            description: t.screenshot12Description,
+            gif: null,
+        },
+        {
+            image: chatScreen,
+            title: t.screenshot13Title,
+            description: t.screenshot13Description,
+            gif: letterGif,
+        },
+        {
+            image: bulbsScreen,
+            title: t.screenshot14Title,
+            description: t.screenshot14Description,
+            gif: null,
+        },
+        {
+            image: costumeScreen,
+            title: t.screenshot15Title,
+            description: t.screenshot15Description,
+            gif: null,
+        },
+        {
+            image: shoppingScreen,
+            title: t.screenshot16Title,
+            description: t.screenshot16Description,
+            gif: null,
+        },
+        {
+            image: collectionScreen,
+            title: t.screenshot17Title,
+            description: t.screenshot17Description,
+            gif: null,
+        },
+    ];
 
-  // Trigger intro animation when section comes into view
-  useEffect(() => {
-    const currentSection = sectionRef.current;
-    if (!currentSection) return;
+    // Trigger intro animation when section comes into view
+    useEffect(() => {
+        const currentSection = sectionRef.current;
+        if (!currentSection) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsInView(true);
-            
-            // Only play intro animation if it hasn't been played before
-            if (!hasPlayedIntroRef.current) {
-              // Clear any existing timer
-              if (keyringTimerRef.current) {
-                clearTimeout(keyringTimerRef.current);
-              }
-              keyringTimerRef.current = setTimeout(() => {
-                setShowKeyring(true);
-              }, 500);
-            } else {
-              // Skip intro animation and show screenshots immediately
-              setIntroComplete(true);
-              setActiveIndex(0);
-            }
-          } else {
-            // Only reset view state, but keep intro completion state
-            setIsInView(false);
-            if (!hasPlayedIntroRef.current) {
-              setShowKeyring(false);
-              setIntroComplete(false);
-            }
-            if (keyringTimerRef.current) {
-              clearTimeout(keyringTimerRef.current);
-              keyringTimerRef.current = null;
-            }
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    observer.observe(currentSection);
-
-    return () => {
-      observer.disconnect();
-      if (keyringTimerRef.current) {
-        clearTimeout(keyringTimerRef.current);
-      }
-    };
-  }, []);
-
-  // Scroll-based screenshot changing (only after intro is complete)
-  useEffect(() => {
-    if (!introComplete) return;
-
-    const observers: (IntersectionObserver | null)[] = [];
-    
-    // Small delay to ensure refs are attached
-    const timeoutId = setTimeout(() => {
-      featureRefs.current.forEach((ref, index) => {
-        if (!ref) {
-          observers.push(null);
-          return;
-        }
-        
         const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                setActiveIndex(index);
-              }
-            });
-          },
-          {
-            threshold: 0.6,
-            rootMargin: '-20% 0px -20% 0px',
-          }
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsInView(true);
+
+                        // Only play intro animation if it hasn't been played before
+                        if (!hasPlayedIntroRef.current) {
+                            // Clear any existing timer
+                            if (keyringTimerRef.current) {
+                                clearTimeout(keyringTimerRef.current);
+                            }
+                            // Use longer delay on first trigger to ensure proper initialization
+                            keyringTimerRef.current = setTimeout(() => {
+                                setShowKeyring(true);
+                            }, 300);
+                        } else {
+                            // Skip intro animation and show screenshots immediately
+                            setIntroComplete(true);
+                            setActiveIndex(0);
+                        }
+                    } else {
+                        // Only reset view state when leaving viewport significantly
+                        if (entry.intersectionRatio < 0.1) {
+                            setIsInView(false);
+                            if (!hasPlayedIntroRef.current) {
+                                setShowKeyring(false);
+                                setIntroComplete(false);
+                                if (keyringTimerRef.current) {
+                                    clearTimeout(keyringTimerRef.current);
+                                    keyringTimerRef.current = null;
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            {
+                threshold: [0, 0.1, 0.5, 1.0],
+                rootMargin: '0px',
+            }
         );
 
-        observer.observe(ref);
-        observers.push(observer);
-      });
-    }, 100);
+        observer.observe(currentSection);
 
-    return () => {
-      clearTimeout(timeoutId);
-      observers.forEach((observer) => observer?.disconnect());
-    };
-  }, [language, introComplete]);
+        return () => {
+            observer.disconnect();
+            if (keyringTimerRef.current) {
+                clearTimeout(keyringTimerRef.current);
+            }
+        };
+    }, []);
 
-  return (
-    <section id="screenshots" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100" ref={sectionRef}>
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+    // Scroll-based screenshot changing (only after intro is complete)
+    useEffect(() => {
+        if (!introComplete) return;
+
+        const observers: (IntersectionObserver | null)[] = [];
+
+        // Small delay to ensure refs are attached
+        const timeoutId = setTimeout(() => {
+            featureRefs.current.forEach((ref, index) => {
+                if (!ref) {
+                    observers.push(null);
+                    return;
+                }
+
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setActiveIndex(index);
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.6,
+                        rootMargin: '-20% 0px -20% 0px',
+                    }
+                );
+
+                observer.observe(ref);
+                observers.push(observer);
+            });
+        }, 100);
+
+        return () => {
+            clearTimeout(timeoutId);
+            observers.forEach((observer) => observer?.disconnect());
+        };
+    }, [language, introComplete]);
+
+    return (
+        <section
+            id="screenshots"
+            className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100"
+            ref={sectionRef}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-gray-900 mb-4" style={{ fontFamily: "'ZCOOL KuaiLe', cursive" }}>
-            {t.experienceTitle}
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-full mx-auto">
-            {t.experienceDescription}
-          </p>
-        </motion.div>
-
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-          {/* Sticky Phone Mockup - Left Side */}
-          <div className="w-full lg:w-1/2 lg:sticky lg:top-24 flex justify-center">
-            <div className="relative min-h-[600px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FE2AB3] to-[#20EDA3] rounded-[3rem] blur-3xl opacity-20" />
-              <div className="relative bg-white rounded-[2.5rem] shadow-2xl p-3 w-[280px] sm:w-[320px]">
-                <div className="relative w-full aspect-[9/19.5] bg-gray-900 rounded-[2rem] overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    {introComplete ? (
-                      <motion.img
-                        key={activeIndex}
-                        src={screenshots[activeIndex].image}
-                        alt={screenshots[activeIndex].title}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    ) : (
-                      <div key="black-screen" className="absolute inset-0 w-full h-full bg-black" />
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
-
-              {/* Keyring Animation */}
-              <AnimatePresence>
-                {showKeyring && !introComplete && (
-                  <motion.div
-                    initial={{ x: -350, y: 80, rotate: -30, scale: 0.7, opacity: 0 }}
-                    animate={{ 
-                      x: 30,
-                      y: 140,
-                      rotate: 5,
-                      scale: 1,
-                      opacity: 1,
-                    }}
-                    transition={{ 
-                      duration: 1.8,
-                      ease: [0.34, 1.56, 0.64, 1]
-                    }}
-                    onAnimationComplete={() => {
-                      setTimeout(() => {
-                        setIntroComplete(true);
-                        setActiveIndex(0);
-                        hasPlayedIntroRef.current = true;
-                      }, 600);
-                    }}
-                    className="absolute pointer-events-none left-0 top-0"
-                    style={{ zIndex: 100 }}
-                  >
-                    <motion.img
-                      src={keyringImage}
-                      alt="Keyring"
-                      className="w-28 h-28 sm:w-36 sm:h-36 object-contain drop-shadow-2xl"
-                      animate={{
-                        rotate: [5, -5, 8, -8, 5],
-                      }}
-                      transition={{
-                        duration: 0.5,
-                        delay: 1.8,
-                        ease: "easeInOut"
-                      }}
-                    />
-                    {/* Tap effect */}
-                    <motion.div
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: [0, 1.5, 2, 0], opacity: [0, 0.8, 0.6, 0] }}
-                      transition={{ duration: 0.8, delay: 2.2 }}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-white border-4 border-[#20EDA3]"
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-
-          {/* Feature Descriptions - Right Side */}
-          <motion.div 
-            className="w-full lg:w-1/2 space-y-32"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: introComplete ? 1 : 0 }}
-            transition={{ duration: 0.6, delay: introComplete ? 0.5 : 0 }}
-          >
-            {screenshots.map((screenshot, index) => (
-              <div
-                key={`screenshot-${index}`}
-                ref={(el) => (featureRefs.current[index] = el)}
-                className={`flex items-center ${
-                  index === screenshots.length - 1 
-                    ? 'min-h-[100vh] lg:min-h-[80vh]' 
-                    : 'min-h-[60vh] lg:min-h-[40vh]'
-                }`}
-              >
+            <div className="max-w-7xl mx-auto">
                 <motion.div
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                  className={`transition-opacity duration-500 ${
-                    activeIndex === index ? 'opacity-100' : 'opacity-40'
-                  }`}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-16"
                 >
-                  <div className="inline-block px-4 py-1 bg-[#FE2AB3] text-white rounded-full mb-4">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl text-gray-900 mb-4" style={{ fontFamily: "'ZCOOL KuaiLe', cursive" }}>
-                    {screenshot.title}
-                  </h3>
-                  <p className="text-lg text-gray-600 leading-relaxed">
-                    {screenshot.description}
-                  </p>
-                  {screenshot.gif && (
-                    <div className="mt-6 flex justify-start">
-                      <img 
-                        src={screenshot.gif} 
-                        alt={`${screenshot.title} animation`}
-                        className="object-contain"
-                        style={{ width: '250px', height: 'auto' }}
-                      />
-                    </div>
-                  )}
+                    <h2
+                        className="text-3xl sm:text-4xl lg:text-5xl text-gray-900 mb-4"
+                        style={{ fontFamily: "'ZCOOL KuaiLe', cursive" }}
+                    >
+                        {t.experienceTitle}
+                    </h2>
+                    <p className="text-lg sm:text-xl text-gray-600 max-w-full mx-auto">{t.experienceDescription}</p>
                 </motion.div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
+                    {/* Sticky Phone Mockup - Left Side */}
+                    <div className="w-full lg:w-1/2 lg:sticky lg:top-24 flex justify-center">
+                        <div className="relative min-h-[600px]">
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#FE2AB3] to-[#20EDA3] rounded-[3rem] blur-3xl opacity-20" />
+                            <div className="relative bg-white rounded-[2.5rem] shadow-2xl p-3 w-[280px] sm:w-[320px]">
+                                <div className="relative w-full aspect-[9/19.5] bg-gray-900 rounded-[2rem] overflow-hidden">
+                                    <AnimatePresence mode="wait">
+                                        {introComplete ? (
+                                            <motion.img
+                                                key={activeIndex}
+                                                src={screenshots[activeIndex].image}
+                                                alt={screenshots[activeIndex].title}
+                                                className="absolute inset-0 w-full h-full object-cover"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -20 }}
+                                                transition={{ duration: 0.3 }}
+                                            />
+                                        ) : (
+                                            <div
+                                                key="black-screen"
+                                                className="absolute inset-0 w-full h-full bg-black"
+                                            />
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            </div>
+
+                            {/* Keyring Animation */}
+                            <AnimatePresence>
+                                {showKeyring && !introComplete && (
+                                    <motion.div
+                                        initial={{ x: -350, y: 80, rotate: -30, scale: 0.7, opacity: 0 }}
+                                        animate={{
+                                            x: 30,
+                                            y: 140,
+                                            rotate: 5,
+                                            scale: 1,
+                                            opacity: 1,
+                                        }}
+                                        transition={{
+                                            duration: 1.8,
+                                            ease: [0.34, 1.56, 0.64, 1],
+                                        }}
+                                        onAnimationComplete={() => {
+                                            // Mark as played immediately to prevent interruption
+                                            hasPlayedIntroRef.current = true;
+                                            setTimeout(() => {
+                                                setIntroComplete(true);
+                                                setActiveIndex(0);
+                                            }, 600);
+                                        }}
+                                        className="absolute pointer-events-none left-0 top-0"
+                                        style={{ zIndex: 100 }}
+                                    >
+                                        <motion.img
+                                            src={keyringImage}
+                                            alt="Keyring"
+                                            className="w-28 h-28 sm:w-36 sm:h-36 object-contain drop-shadow-2xl"
+                                            animate={{
+                                                rotate: [5, -5, 8, -8, 5],
+                                            }}
+                                            transition={{
+                                                duration: 0.5,
+                                                delay: 1.8,
+                                                ease: 'easeInOut',
+                                            }}
+                                        />
+                                        {/* Tap effect */}
+                                        <motion.div
+                                            initial={{ scale: 0, opacity: 0 }}
+                                            animate={{ scale: [0, 1.5, 2, 0], opacity: [0, 0.8, 0.6, 0] }}
+                                            transition={{ duration: 0.8, delay: 2.2 }}
+                                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-white border-4 border-[#20EDA3]"
+                                        />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    </div>
+
+                    {/* Feature Descriptions - Right Side */}
+                    <motion.div
+                        className="w-full lg:w-1/2 space-y-32"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: introComplete ? 1 : 0 }}
+                        transition={{ duration: 0.6, delay: introComplete ? 0.5 : 0 }}
+                    >
+                        {screenshots.map((screenshot, index) => (
+                            <div
+                                key={`screenshot-${index}`}
+                                ref={(el) => (featureRefs.current[index] = el)}
+                                className={`screenshot-item flex items-center px-4 py-8 rounded-2xl ${
+                                    index === screenshots.length - 1
+                                        ? 'min-h-[100vh] lg:min-h-[80vh]'
+                                        : 'min-h-[60vh] lg:min-h-[40vh]'
+                                }`}
+                            >
+                                <motion.div
+                                    initial={{ opacity: 0, x: 50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    viewport={{ once: true }}
+                                    className={`transition-opacity duration-500 w-full ${
+                                        activeIndex === index ? 'opacity-100' : 'opacity-40'
+                                    }`}
+                                >
+                                    <div
+                                        className="inline-block px-4 py-1 rounded-full mb-4"
+                                        style={{
+                                            zIndex: 2,
+                                            background: '#FE2AB4',
+                                            color: '#fff',
+                                        }}
+                                    >
+                                        {String(index + 1).padStart(2, '0')}
+                                    </div>
+                                    <h3
+                                        className="text-2xl sm:text-3xl lg:text-4xl text-gray-900 mb-4"
+                                        style={{ fontFamily: "'ZCOOL KuaiLe', cursive" }}
+                                    >
+                                        {screenshot.title}
+                                    </h3>
+                                    <p className="text-lg text-gray-600 leading-relaxed">{screenshot.description}</p>
+                                    {screenshot.gif && (
+                                        <div className="mt-6 flex justify-start">
+                                            <img
+                                                src={screenshot.gif}
+                                                alt={`${screenshot.title} animation`}
+                                                className="object-contain"
+                                                style={{ width: '250px', height: 'auto' }}
+                                            />
+                                        </div>
+                                    )}
+                                </motion.div>
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
+            </div>
+        </section>
+    );
 }
