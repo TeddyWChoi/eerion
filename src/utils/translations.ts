@@ -174,7 +174,7 @@ export const translations = {
         heroDescription:
             'Meet your pixel buddy that grows with your daily activities. Walk, eat healthy, and sleep well to help your buddy thrive.',
         downloadApp: 'Download App',
-        watchDemo: 'Watch Demo',
+        watchDemo: 'Watch Video',
         downloads: 'Downloads',
         rating: 'Rating',
         activeUsers: 'Active Users',
